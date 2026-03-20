@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yulia Aznauryan — L&D Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F8F6F3;
+    --ink: #1A1A1A;
+    --muted: #9A9289;
+    --accent: #B85C3A;
+    --line: #E2DDD8;
+    --white: #FFFFFF;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 28px 64px;
+    background: var(--bg);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s ease;
+  }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    letter-spacing: 0.5px;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 40px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .nav-links a:hover { color: var(--ink); }
+
+  /* ── HERO ── */
+  .hero {
+    height: 100vh;
+    display: grid;
+    grid-template-rows: 1fr auto;
+    padding: 96px 64px 0;
+  }
+
+  .hero-top {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    opacity: 0;
+    animation: appear 1s ease forwards 0.3s;
+  }
+
+  .hero-eyebrow {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+
+  .hero-heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(56px, 8vw, 108px);
+    font-weight: 300;
+    line-height: 0.92;
+    letter-spacing: -2px;
+    color: var(--ink);
+    margin-bottom: 28px;
+  }
+
+  .hero-heading em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero-desc-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 40px;
+  }
+
+  .hero-desc {
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.8;
+    max-width: 380px;
+  }
+
+  .hero-meta {
+    text-align: right;
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: var(--muted);
+    line-height: 2;
+    flex-shrink: 0;
+  }
+
+  .hero-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-top: 1px solid var(--line);
+    border-left: 1px solid var(--line);
+    opacity: 0;
+    animation: appear 1s ease forwards 0.9s;
+  }
+
+  .hero-stat {
+    padding: 28px 32px;
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    transition: background 0.3s ease;
+  }
+
+  .hero-stat:hover { background: var(--white); }
+
+  .hero-stat-n {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 40px;
+    font-weight: 300;
+    color: var(--ink);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .hero-stat-l {
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    height: 1px;
+    background: var(--line);
+    margin: 0 64px;
+  }
+
+  /* ── SECTIONS ── */
+  .section { padding: 100px 64px; }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 24px;
+    margin-bottom: 64px;
+  }
+
+  .section-num {
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--muted);
+    font-weight: 400;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 4vw, 52px);
+    font-weight: 300;
+    color: var(--ink);
+    line-height: 1.1;
+  }
+
+  .section-title em { font-style: italic; color: var(--accent); }
+
+  /* ── STATS ── */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border: 1px solid var(--line);
+  }
+
+  .stat {
+    padding: 40px 32px;
+    border-right: 1px solid var(--line);
+    transition: background 0.3s ease;
+  }
+
+  .stat:last-child { border-right: none; }
+  .stat:hover { background: var(--white); }
+
+  .stat-n {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 52px;
+    font-weight: 300;
+    color: var(--ink);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .stat-l {
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* ── ABOUT ── */
+  .about-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 120px;
+    align-items: start;
+  }
+
+  .about-body {
+    font-size: 16px;
+    line-height: 1.95;
+    color: #4A4545;
+  }
+
+  .about-body p + p { margin-top: 20px; }
+
+  .skills-title {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 24px;
+  }
+
+  .skill-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 14px;
+    color: var(--ink);
+    transition: color 0.2s ease;
+  }
+
+  .skill-row:hover { color: var(--accent); }
+
+  .skill-arrow {
+    font-size: 10px;
+    color: var(--line);
+    transition: color 0.2s ease;
+  }
+
+  .skill-row:hover .skill-arrow { color: var(--accent); }
+
+  /* ── PROJECTS ── */
+  .project-row {
+    display: grid;
+    grid-template-columns: 48px 1fr auto;
+    align-items: center;
+    gap: 32px;
+    padding: 32px 0;
+    border-bottom: 1px solid var(--line);
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.25s ease;
+  }
+
+  .project-row:first-child { border-top: 1px solid var(--line); }
+  .project-row:hover .project-name { color: var(--accent); }
+  .project-row:hover .project-arrow { transform: translateX(4px); color: var(--accent); }
+
+  .project-idx {
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 1px;
+    font-family: 'Cormorant Garamond', serif;
+  }
+
+  .project-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+    font-weight: 400;
+    margin-bottom: 4px;
+    transition: color 0.25s ease;
+  }
+
+  .project-meta {
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.5px;
+  }
+
+  .project-tags-inline {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  .ptag {
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--muted);
+    border: 1px solid var(--line);
+    padding: 4px 10px;
+    border-radius: 20px;
+  }
+
+  .project-arrow {
+    font-size: 16px;
+    color: var(--muted);
+    transition: all 0.25s ease;
+    margin-left: 8px;
+  }
+
+  /* ── CASE STUDIES ── */
+  .cases-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    background: var(--line);
+  }
+
+  .case {
+    background: var(--bg);
+    padding: 48px 40px;
+    transition: background 0.3s ease;
+  }
+
+  .case:hover { background: var(--white); }
+
+  .case-num {
+    font-size: 13px;
+    color: var(--muted);
+    letter-spacing: 1px;
+    margin-bottom: 32px;
+    font-family: 'Cormorant Garamond', serif;
+  }
+
+  .case-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 1.3;
+    margin-bottom: 16px;
+  }
+
+  .case-body {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.8;
+    margin-bottom: 32px;
+  }
+
+  .case-metric {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 40px;
+    font-weight: 300;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .case-metric-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--muted);
+  }
+
+  .case-link {
+    display: inline-block;
+    margin-top: 24px;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink);
+    padding-bottom: 2px;
+    transition: color 0.2s ease, border-color 0.2s ease;
+  }
+
+  .case-link:hover { color: var(--accent); border-color: var(--accent); }
+
+  /* ── PARTNERS ── */
+  .partners-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border: 1px solid var(--line);
+  }
+
+  .partner {
+    padding: 40px 32px;
+    border-right: 1px solid var(--line);
+    transition: background 0.3s ease;
+  }
+
+  .partner:last-child { border-right: none; }
+  .partner:hover { background: var(--white); }
+
+  .partner-emoji { font-size: 24px; margin-bottom: 16px; }
+
+  .partner-n {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 400;
+    margin-bottom: 4px;
+  }
+
+  .partner-t {
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* ── CONTACT ── */
+  .contact-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 120px;
+    align-items: start;
+  }
+
+  .contact-heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(40px, 5vw, 64px);
+    font-weight: 300;
+    line-height: 1.1;
+    margin-bottom: 24px;
+  }
+
+  .contact-heading em { font-style: italic; color: var(--accent); }
+
+  .contact-sub {
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+
+  .c-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--line);
+    text-decoration: none;
+    color: var(--ink);
+    font-size: 15px;
+    transition: color 0.2s ease;
+  }
+
+  .c-item:first-child { border-top: 1px solid var(--line); }
+  .c-item:hover { color: var(--accent); }
+
+  .c-label {
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  .c-arrow {
+    font-size: 18px;
+    color: var(--line);
+    transition: all 0.2s ease;
+  }
+
+  .c-item:hover .c-arrow { color: var(--accent); transform: translateX(4px); }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 32px 64px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.5px;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes appear {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 24px 32px; }
+    .nav-links { display: none; }
+    .hero { padding: 80px 32px 0; }
+    .hero-desc-row { flex-direction: column; gap: 16px; align-items: flex-start; }
+    .hero-meta { text-align: left; }
+    .divider { margin: 0 32px; }
+    .section { padding: 72px 32px; }
+
+
+    .about-layout, .contact-layout { grid-template-columns: 1fr; gap: 48px; }
+    .cases-grid { grid-template-columns: 1fr; }
+    .partners-row { grid-template-columns: 1fr 1fr; }
+    .partner { border-bottom: 1px solid var(--line); }
+    .project-row { grid-template-columns: 32px 1fr; }
+    .project-tags-inline { display: none; }
+    footer { flex-direction: column; gap: 8px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Yulia Aznauryan</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Work</a></li>
+    <li><a href="#cases">Cases</a></li>
+    <li><a href="#partners">Partners</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-top">
+    <div class="hero-eyebrow">Learning &amp; Development &middot; Portfolio</div>
+    <h1 class="hero-heading">Yulia<br><em>Aznauryan</em></h1>
+    <div class="hero-desc-row">
+      <p class="hero-desc">L&amp;D Program Manager designing training programs that grow with your business &mdash; across IT companies, tech academies, and international markets.</p>
+      <div class="hero-meta">
+        Yerevan, Armenia<br>
+        Open to Remote &amp; Relocation<br>
+        2021 &ndash; Present
+      </div>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="hero-stat-n">5+</div>
+      <div class="hero-stat-l">Years Experience</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-n">450</div>
+      <div class="hero-stat-l">Employees Trained</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-n">127</div>
+      <div class="hero-stat-l">Academy Students</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-n">6</div>
+      <div class="hero-stat-l">Countries Managed</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ABOUT -->
+<section class="section" id="about">
+  <div class="section-header">
+    <span class="section-num">01</span>
+    <h2 class="section-title">About <em>me</em></h2>
+  </div>
+  <div class="about-layout">
+    <div class="about-body">
+      <p>I'm a Learning &amp; Development Program Manager with over five years of experience in the IT and EdTech sectors.</p>
+      <p>From managing the Sourcemind Academy end-to-end across three countries, to running organization-wide L&amp;D for 450+ employees at Webb Fontaine, I bring both strategic vision and hands-on execution to training programs.</p>
+      <p>I'm based in Yerevan, Armenia, and open to remote or relocation opportunities worldwide.</p>
+    </div>
+    <div class="skills-block">
+      <div class="skills-title">Core Skills</div>
+      <div class="skill-row"><span>L&amp;D Program Design &amp; Delivery</span><span class="skill-arrow">↗</span></div>
+      <div class="skill-row"><span>Training Needs Analysis</span><span class="skill-arrow">↗</span></div>
+      <div class="skill-row"><span>LMS Administration <span style="font-size:11px; color:var(--muted);">(Cornerstone, Articulate, Genially)</span></span><span class="skill-arrow">↗</span></div>
+      <div class="skill-row"><span>Instructional Design &amp; eLearning</span><span class="skill-arrow">↗</span></div>
+      <div class="skill-row"><span>Academy Operations</span><span class="skill-arrow"></span></div>
+      <div class="skill-row"><span>Trainer Recruitment &amp; Contracts</span><span class="skill-arrow">↗</span></div>
+      <div class="skill-row"><span>Marketing Campaign Strategy</span><span class="skill-arrow"></span></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PROJECTS -->
+<section class="section" id="projects">
+  <div class="section-header">
+    <span class="section-num">02</span>
+    <h2 class="section-title">Selected <em>work</em></h2>
+  </div>
+  <div class="projects-list">
+
+    <a href="https://www.linkedin.com/company/76121782/admin/page-posts/published/" target="_blank" class="project-row">
+      <span class="project-idx">01</span>
+      <div class="project-info">
+        <div class="project-name">Sourcemind Academy</div>
+        <div class="project-meta">Armenia · Benin · Guinea — Full end-to-end academy management</div>
+      </div>
+      <div class="project-tags-inline">
+        <span class="ptag">Academy</span>
+        <span class="ptag">Remote</span>
+        <span class="ptag">Multi-country</span>
+        <span class="project-arrow">→</span>
+      </div>
+    </a>
+
+    <a href="https://www.linkedin.com/posts/webb-fontaine_webbfontaine-cybersecuritymonth-ctf-ugcPost-7251950243850637316-U7g6?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAB9EvMIBQfU4OnZDreH8hGNSVIsoFf-wDvs" target="_blank" class="project-row">
+      <span class="project-idx">02</span>
+      <div class="project-info">
+        <div class="project-name">Capture the Flag — Cybersecurity</div>
+        <div class="project-meta">Webb Fontaine — Engineers, QA &amp; DevOps</div>
+      </div>
+      <div class="project-tags-inline">
+        <span class="ptag">Cybersecurity</span>
+        <span class="ptag">Gamification</span>
+        <span class="project-arrow">→</span>
+      </div>
+    </a>
+
+
+    <a href="https://view.genially.com/68dce12a3469ac8cf4707ad5" target="_blank" class="project-row">
+      <span class="project-idx">03</span>
+      <div class="project-info">
+        <div class="project-name">Instructional Design Sample</div>
+        <div class="project-meta">Genially — Interactive eLearning sample</div>
+      </div>
+      <div class="project-tags-inline">
+        <span class="ptag">Instructional Design</span>
+        <span class="ptag">eLearning</span>
+        <span class="project-arrow">→</span>
+      </div>
+    </a>
+
+    <a href="https://share.eu.articulate.com/Qu-oEqBuUjwiWB6_sBjqM" target="_blank" class="project-row">
+      <span class="project-idx">04</span>
+      <div class="project-info">
+        <div class="project-name">Instructional Design Sample</div>
+        <div class="project-meta">Articulate — Interactive eLearning sample</div>
+      </div>
+      <div class="project-tags-inline">
+        <span class="ptag">Instructional Design</span>
+        <span class="ptag">Articulate</span>
+        <span class="project-arrow">→</span>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CASE STUDIES -->
+<section class="section" id="cases">
+  <div class="section-header">
+    <span class="section-num">03</span>
+    <h2 class="section-title">Case <em>studies</em></h2>
+  </div>
+  <div class="cases-grid">
+
+    <div class="case">
+      <div class="case-num">Case 01</div>
+      <div class="case-title">Scaling L&amp;D for 450 Employees at Webb Fontaine</div>
+      <div class="case-body">Designed end-to-end L&amp;D programs, conducted organization-wide TNA, and transitioned 50% of classroom sessions into scalable eLearning modules.</div>
+      <div class="case-metric">50%</div>
+      <div class="case-metric-label">Sessions Digitized</div>
+      <a href="https://www.linkedin.com/posts/webb-fontaine_webb-fontaine-webb-tv-with-yulia-aznauryan-activity-7306271126106660865-UmTY?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAB9EvMIBQfU4OnZDreH8hGNSVIsoFf-wDvs" target="_blank" class="case-link">View on LinkedIn</a>
+    </div>
+
+    <div class="case">
+      <div class="case-num">Case 02</div>
+      <div class="case-title">Running Sourcemind Academy Across 3 Countries</div>
+      <div class="case-body">Managed a training academy across Armenia, Benin &amp; Guinea — from trainer recruitment and legal contracts to marketing and closing ceremonies.</div>
+      <div class="case-metric">73</div>
+      <div class="case-metric-label">Graduates</div>
+      <a href="https://sourcemind.com/" target="_blank" class="case-link">View Academy</a>
+    </div>
+
+    <div class="case">
+      <div class="case-num">Case 03</div>
+      <div class="case-title">Building a 50+ Trainer Network at Ardy Academy</div>
+      <div class="case-body">Coordinated the full course creation lifecycle for 50+ trainers across 12 departments — from instructional design through LMS deployment and quality review.</div>
+      <div class="case-metric">50+</div>
+      <div class="case-metric-label">Trainers Managed</div>
+      <a href="https://ardy.am/en/" target="_blank" class="case-link">View Academy</a>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PARTNERS -->
+<section class="section" id="partners">
+  <div class="section-header">
+    <span class="section-num">04</span>
+    <h2 class="section-title">Companies &amp; <em>partners</em></h2>
+  </div>
+  <div class="partners-row">
+    <div class="partner">
+      <div class="partner-emoji">🏢</div>
+      <div class="partner-n">Webb Fontaine</div>
+      <div class="partner-t">IT / Trade Tech</div>
+    </div>
+    <div class="partner">
+      <div class="partner-emoji">🎓</div>
+      <div class="partner-n">Sourcemind Academy</div>
+      <div class="partner-t">Tech Academy</div>
+    </div>
+    <div class="partner">
+      <div class="partner-emoji">📚</div>
+      <div class="partner-n">Ardy Academy</div>
+      <div class="partner-t">EdTech</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CONTACT -->
+<section class="section" id="contact">
+  <div class="section-header">
+    <span class="section-num">05</span>
+    <h2 class="section-title">Get in <em>touch</em></h2>
+  </div>
+  <div class="contact-layout">
+    <div>
+      <h3 class="contact-heading">Let's work<br><em>together</em></h3>
+      <p class="contact-sub">Open to L&amp;D roles, consultancy projects, and managing educational programs, especially in EdTech, or international development. Based in Yerevan, open to remote and relocation.</p>
+    </div>
+    <div>
+      <a href="https://www.linkedin.com/in/yulia-a-0aa82b127/" target="_blank" class="c-item">
+        <div>
+          <span class="c-label">LinkedIn</span>
+          linkedin.com/in/yulia-a-0aa82b127
+        </div>
+        <span class="c-arrow">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-
